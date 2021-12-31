@@ -1,0 +1,43 @@
+package com.revature.models;
+
+import java.util.Scanner;
+
+public class Menu {
+	
+	int id;
+    String username;
+    String password;
+    Role role;
+
+	//NEW UN COOL WAY OF GETTING USER INPUTS - MENU
+	
+	Scanner scan = new Scanner(System.in);
+	
+	System.out.println("How do you want to log in?");
+	System.out.println("=========================");
+	System.out.println("username?");
+	System.out.println("id?");
+	System.out.println("role?");
+	
+	String input = scan.nextLine();
+	
+	switch(input) {
+	
+	case "id" :{
+		System.out.println("Enter an employee id");
+		break;
+	}
+	
+	case "username" : {
+		System.out.println("Enter username");
+		break;
+	}
+	
+	case "role": {
+		System.out.println("Enter employee role");
+	}
+	
+	}
+}
+
+

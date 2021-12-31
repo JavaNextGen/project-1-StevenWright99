@@ -1,0 +1,8 @@
+INDEX VERSION 1.131+C:\Users\sbwri\OneDrive\Documents\Revature\Batches\projects\.metadata\.plugins\org.eclipse.jdt.core
+2942157786.index
+4208087467.index
+3463698412.index
+1287116066.index
+3202509566.index
+4251179896.index
+2929575954.index

@@ -1,0 +1,17 @@
+package com.revature;
+
+import com.revature.models.Menu;
+import com.revature.models.Role;
+import com.revature.models.User;
+
+public class Driver {
+
+    public static void main(String[] args) {
+    	
+//    	Menu menu = new Menu();
+//    	menu.displayMenu();
+    	
+    	Role role = Role.EMPLOYEE;
+    	System.out.println(role.EMPLOYEE);
+    }
+}

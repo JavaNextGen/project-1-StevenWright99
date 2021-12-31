@@ -1,0 +1,72 @@
+package com.revature.models;
+
+import java.util.Scanner;
+
+//This MEnu Class will have a displayMenu() method that displays the menu to the user and lets them interact with it
+//The menu will make use of the Scanner Class to take user inputs in order to travel through the menu options
+public class Menu {
+
+	//All of the menu options and control flow are contained within this method
+	public void displayMenu() {
+
+		boolean displayMenu = true; //We're suing this to toggle whether menu continues after user input
+		Scanner scan = new Scanner(System.in); //Scanner object to parse (take) user input
+		
+		//give the user a greetinge
+		System.out.println("==========================================");
+		System.out.println("Welcome to the Krusty Krab");
+		System.out.println("==========================================");
+	
+		//display the menu as long as the displayMEnu boolean == true
+		//this is going to hold and display all my menu options until displayMEnu  == false
+		
+		//menu options
+		System.out.println("hi -> get greeted");
+		System.out.println("employees -> show all employees");
+		System.out.println("employeesById -> get employees with a certain ID");
+		
+		//parse user input after they choose a menu option, and put it into a String variable
+		String input = scan.nextLine();
+		
+		//switch statement that takes the user input and executed the appropriate code
+		
+		switch(input) {
+		
+		case "hi": {
+			System.out.println("Hello there! ");
+			break; //we need a break in each case block, or else all the other cases will still run
+			
+		}
+		case "employees" :{
+			System.out.println("functionality tbd");
+			break;
+		}
+		case "employeesById" :{
+			System.out.println("functionality tbd");
+			break;
+			
+		}
+		
+		case "exit" :{
+			displayMenu = false;
+			break;
+		}
+		
+		//this default block will catch any user inputs that don't match a valid menu option
+		
+		default: {
+			System.out.println("Invalid selection, try again :( ");
+			break;
+		}
+		
+		
+		} //end of switch
+	
+		System.out.println("test");
+	
+	
+	
+	
+	}
+	
+}
