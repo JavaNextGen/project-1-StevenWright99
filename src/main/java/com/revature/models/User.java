@@ -20,6 +20,11 @@ public class User extends AbstractUser {
 	private String fname;
 	private String lname;
 	private String email;
+	private int id;
+	private Role role;
+	private String username;
+	private String password;
+	private int role_id;
 
     public User() {
         super();
@@ -36,6 +41,30 @@ public class User extends AbstractUser {
     public User(int id, String username, String password, Role role, String fname, String lname, String email) {
     	
     }
+    
+    public User(int id, String username, String password, String fname, String lname, String email) {
+    	
+    }
+    
+    public User(int id, String fname, String lname, int role) {
+    	
+    	
+    }
+    //This constructor will hopefully set up the ers_users table from the project schema
+    public User (String username, String password, String fname, String lname, String email, int id, int role_id) {
+    	this.username = username;
+    	this.password = password;
+    	this.fname= fname;
+    	this.lname = lname;
+    	this.email = email;
+    	this.id = id;
+    	this.role_id = role_id;
+    	
+    }
+    @Override
+	public String toString() {
+		return "Employee [employee_id=" + id + ", role_id=" + role_id + " + f_name=" + fname + ", l_name=" + lname + ", username=" + username + ", password=" + password + ", email=" + email + "]";
+	}
 }
     
     

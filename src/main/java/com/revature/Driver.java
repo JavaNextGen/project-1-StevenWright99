@@ -18,12 +18,12 @@ public class Driver {
     	} catch (SQLException e) {
     		System.out.println("Connection failed");
     		e.printStackTrace();
-    	}
+    	}  
     	
     	
     	
-//    	Menu menu = new Menu();
-//    	menu.displayMenu();
+    	Menu menu = new Menu();
+    	menu.displayMenu();
     	
     	//Role role = Role.EMPLOYEE;
     	//System.out.println(role.EMPLOYEE);

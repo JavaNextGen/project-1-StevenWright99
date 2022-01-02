@@ -39,28 +39,55 @@ public class ConnectionFactory {
      * <p>Typically, this is accomplished via the use of the {@link java.sql.DriverManager} class.</p>
      * @throws SQLException 
      */
-    public static Connection getConnection() throws SQLException {
+//    public static Connection getConnection() throws SQLException {
+//        
+//    	//For compatibility with other rech, we need to register our PostrgeSQL Driver
+//    	//This process makes the application aware of what database Driver (SQL Dialect) we're using
+//    	//Try/Catch block for safety
+//    	try {
+//    		Class.forName("org.postgresql.Driver");
+//        }catch(ClassNotFoundException e) {
+//        		System.out.println("Class not found bozo!");
+//        		e.printStackTrace(); //This will print the exception message to the console
+//        }
+//    	
+//    	//WE need to provide our database credentials
+//    	
+//    	//the url to my database schema
+//    	String url = "jdbc:postgresql://localhost:5432/postgres?currentSchema=p1demo";
+//    	//our postgres username 9should just be postgres
+//    	String username = "postgres";
+//    	//your postgres password
+//    	String password = "password";
+//    	
+//    	//This is what actually returns our connection object (note how this method has a return type of Connection
+//    	return DriverManager.getConnection(url, username, password);
+//    	
+//    }
+    
+    ///TEST DELETE LATER
+public static Connection getConnection() throws SQLException {
         
-    	//For compatibility with other rech, we need to register our PostrgeSQL Driver
-    	//This process makes the application aware of what database Driver (SQL Dialect) we're using
-    	//Try/Catch block for safety
+    	//For compatibility with other technologies, we need to register our PostgreSQL Driver
+    	//This process makes the application aware of what database Driver (SQL dialect) we're using
     	try {
-    		Class.forName("org.postgresql.Driver");
-        }catch(ClassNotFoundException e) {
-        		System.out.println("Class not found bozo!");
-        		e.printStackTrace(); //This will print the exception message to the console
-        }
+    		Class.forName("org.postgresql.Driver"); //try to find and return the psotgresql Driver Class
+    	} catch (ClassNotFoundException e) {
+    		System.out.println("CLASS WASN'T FOUND");
+    		e.printStackTrace(); //this will print the exception message to the console
+    	}
     	
-    	//WE need to provide our database credentials
+    	//we need to provide our database credentials
+    	//we'll hardcode them for now, but I'll show a way to hide the credentials in environment variables
     	
     	//the url to my database schema
-    	String url = "jdbc:postgresql://localhost:5432/postgres?currentSchema=project";
-    	//our postgres username 9should just be postgres
+    	String url = "jdbc:postgresql://localhost:5432/postgres?currentSchema=projectwork";
+    	//your postgres username (should just be postgres)
     	String username = "postgres";
-    	//your postgres password
-    	String password = "password";
-    	
-    	//This is what actually returns our connection object (note how this method has a return type of Connection
+    	//your postgres password (hopefully just "password")
+    	String password = "password"; //don't be like me
+    
+    	//This is what actually returns our Connection object. (Note how this method has a return type of Connection)
     	return DriverManager.getConnection(url, username, password);
     	
     }
