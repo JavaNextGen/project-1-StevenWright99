@@ -79,13 +79,14 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.revature.repositories.UserDAO;
+import com.revature.services.UserService;
 
 //This MEnu Class will have a displayMenu() method that displays the menu to the user and lets them interact with it
 //The menu will make use of the Scanner Class to take user inputs in order to travel through the menu options
 public class Menu {
 	
 	UserDAO uDAO = new UserDAO(); //we need to instatiate this object bc we need to use methods from UserDAO
-	
+	UserService es = new UserService();
 
 	//All of the menu options and control flow are contained within this method
 	public void displayMenu() {
@@ -105,6 +106,8 @@ public class Menu {
 		System.out.println("hi -> get greeted");
 		System.out.println("employees -> show all employees");
 		System.out.println("employeesById -> get employees with a certain ID");
+		System.out.println("add -> add a new employee");
+		System.out.println("exit -> exits the application");
 		
 		//parse user input after they choose a menu option, and put it into a String variable
 		String input = scan.nextLine();
@@ -134,6 +137,36 @@ public class Menu {
 			System.out.println("functionality tbd");
 			break;
 			
+		}
+		case "add" :{
+			System.out.println("Enter employee username");
+			String username = scan.nextLine();
+			
+			System.out.println("Enter employee password");
+			String password = scan.nextLine();
+			
+			System.out.println("Enter employee first name");
+			String fname = scan.nextLine();
+			
+			System.out.println("Enter employee last name");
+			String lname = scan.nextLine();
+			
+			System.out.println("Enter employee email");
+			String email = scan.nextLine();
+			
+			System.out.println("Enter role ID: 1) Employee  OR  2) Manager");
+			int role_id = scan.nextInt();
+			scan.nextLine(); //Without any nextLine, your enter keystroke will be used as the next input
+			//Need this to actually move to the next line
+			
+			//Given all of this info, we'll create a new user object to send to the service layer
+			//Then the service layer will send it to the repository layer
+			User newUser = new User(username, password, fname, lname, email, role_id); 
+			es.addUser(newUser);
+			
+			break;
+			
+			//Put the new User into the addUser() method in the UserService class
 		}
 		
 		case "exit" :{

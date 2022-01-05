@@ -5,6 +5,7 @@ import com.revature.models.User;
 import com.revature.util.ConnectionFactory;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -168,5 +169,50 @@ public List<User> getUsers() { //This will use SQL SELECT functionality
 		//(Since there's no guarantee that the try will run)
 		
 	}
+
+	//This method takes in a User object called newUser and will insert it into my database
+	//This was established in the menu class under the add option, and then built upon in the UserService class and this class (UserDAO) for layered functionality
+	public void insertUser(User newUser) {
+		
+		try(Connection conn = ConnectionFactory.getConnection()){
+			
+			//we'll create a SQL statement using parameters to insert a new User
+			String sql = "INSERT INTO ers_users(ers_username, ers_password, user_first_name, user_last_name, user_email, ers_user_role_id) " //ers_user_role_id
+					+ "VALUES (?, ?, ?, ?, ?, ?); "; //the ?s are parameters, which means we have to specify the value of each '?' How? PreparedStatement
+			
+			PreparedStatement ps = conn.prepareStatement(sql); //we use PS for SQL commands with variables
+			
+			//use the PreparedStatement objects' methods to insert values into the query's ?s
+			//the values will come from the User object we send in
+			ps.setString(1, newUser.getUsername());
+			ps.setString(2, newUser.getPassword());		
+			ps.setString(3, newUser.getFname());
+			ps.setString(4, newUser.getEmail());
+			ps.setString(5, newUser.getLname());			
+			ps.setInt(6, newUser.getRole_Id());
+			
+			//this executeUpdate method sends and executes the SQL command we built
+			ps.executeUpdate(); //we use executeUpdate for inserts, updates, and deletes
+			//we use executeQuery() for selects
+			
+			//send confirmation to the console if successful
+			System.out.println("User " + newUser.getFname() + " has been successfully added");
+			
+			
+			
+		} catch(SQLException e) {
+			System.out.println("Failed to add new User");
+			e.printStackTrace();
+		}
+	}
 	
 }
+
+
+
+
+
+
+
+
+

@@ -25,7 +25,7 @@ public class Driver {
     	Menu menu = new Menu();
     	menu.displayMenu();
     	
-    	//Role role = Role.EMPLOYEE;
-    	//System.out.println(role.EMPLOYEE);
+    	Role role = Role.EMPLOYEE;
+    	System.out.println(role.EMPLOYEE);
     }
 }
