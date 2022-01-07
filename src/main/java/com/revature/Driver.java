@@ -25,55 +25,62 @@ public class Driver {
     	}  
     	
     	UserController uc = new UserController();
-    	
-    	//UserService us = new UserService();
-    	    	
-//    	Menu menu = new Menu();
-//    	menu.displayMenu();
-    	
-    	//Role role = Role.EMPLOYEE;
-    	//System.out.println(role.EMPLOYEE);
-    	
+       	    	    	
     	Javalin app = Javalin.create(
 				config -> {
 					config.enableCorsForAllOrigins(); // allows the server to process JS requests from anywhere
 				}
 			).start(3000);
     	
-    	app.get("/", ctx -> {
-    		
-    		ctx.result("Hello, you have successfully set up Javalin. Keep going. Don't give up!");
-    		ctx.status(200);
-    	});
+    	//This pulls up the list on employees on local host
+    	app.get("/employee", uc.getUsersHandler);
     	
-    	// Will return whatever you enter in after localhost:3000/
-    	app.get("/hi/{name}" , ctx -> {
-    		ctx.result("Hi " + ctx.pathParam("name"));
-    		ctx.status(200);
-    	});
+    	//This adds employees to the employee list
+    	app.post("/employee", uc.insertUsersHandler);
     	
-    	//Will return as many inputs as necessary with successive slashes
-    	app.get("/hello/<name>" , ctx -> {
-    		ctx.result("Hello " + ctx.pathParam("name").replace("/", " "));
-    		ctx.status(200);
-    	});
-    	
-    	//Will return 1 + 'SomeString' . Will not add.
-    	app.get("/employee/{e_id}", ctx -> {
-    		ctx.result(1 + (ctx.pathParam("e_id")));
-    		ctx.status(200);
-    	});
-    	
-    	//Will return parameters after ONLY 2 slashes since you have 2 curly braces
-    	//Remember the param names are just that- names. Both 'name' and 'age' will return strings
-    	app.get("/hi/{name}/{age}" , ctx -> {
-    		ctx.result("Hi " + ctx.pathParam("name") + " " + ctx.pathParam("age"));
-    		ctx.status(200);
-    	});
-    	
-    	app.get("employee", uc.getUsersHandler);
     }
     
     
-    
 }
+
+//Menu menu = new Menu();
+//menu.displayMenu();
+
+//Role role = Role.EMPLOYEE;
+//System.out.println(role.EMPLOYEE);
+    	
+    	
+//    	//THESE ARE THE JAVALIN DEMOS
+//    	app.get("/", ctx -> {
+//    		
+//    		ctx.result("Hello, you have successfully set up Javalin. Keep going. Don't give up!");
+//    		ctx.status(200);
+//    	});
+//    	
+//    	// Will return whatever you enter in after localhost:3000/
+//    	app.get("/hi/{name}" , ctx -> {
+//    		ctx.result("Hi " + ctx.pathParam("name"));
+//    		ctx.status(200);
+//    	});
+//    	
+//    	//Will return as many inputs as necessary with successive slashes
+//    	app.get("/hello/<name>" , ctx -> {
+//    		ctx.result("Hello " + ctx.pathParam("name").replace("/", " "));
+//    		ctx.status(200);
+//    	});
+//    	
+//    	//Will return 1 + 'SomeString' . Will not add.
+//    	app.get("/employee/{e_id}", ctx -> {
+//    		ctx.result(1 + (ctx.pathParam("e_id")));
+//    		ctx.status(200);
+//    	});
+//    	
+//    	//Will return parameters after ONLY 2 slashes since you have 2 curly braces
+//    	//Remember the param names are just that- names. Both 'name' and 'age' will return strings
+//    	app.get("/hi/{name}/{age}" , ctx -> {
+//    		ctx.result("Hi " + ctx.pathParam("name") + " " + ctx.pathParam("age"));
+//    		ctx.status(200);
+//    	});
+//    	//THESE ARE THE JAVALIN DEMOS
+    	
+    	

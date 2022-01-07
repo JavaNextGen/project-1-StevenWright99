@@ -187,8 +187,8 @@ public List<User> getUsers() { //This will use SQL SELECT functionality
 			ps.setString(1, newUser.getUsername());
 			ps.setString(2, newUser.getPassword());		
 			ps.setString(3, newUser.getFname());
-			ps.setString(4, newUser.getEmail());
-			ps.setString(5, newUser.getLname());			
+			ps.setString(4, newUser.getLname());	
+			ps.setString(5, newUser.getEmail());
 			ps.setInt(6, newUser.getRole_Id());
 			
 			//this executeUpdate method sends and executes the SQL command we built

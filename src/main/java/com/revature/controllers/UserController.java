@@ -17,6 +17,8 @@ public class UserController {
 	//We'll either get data from the service layer (DAOs)..
 	//..or send data to the service layer (returning a successful response)
 	
+	
+	//The method that gathers list of employees and converts to GSON
 	public Handler getUsersHandler = (ctx) -> {
 		if(ctx.req.getSession() != null) { //This just checks if the session exists
 			
@@ -37,6 +39,28 @@ public class UserController {
 			ctx.result("You failed to get the employees");
 			ctx.status(404);
 			
+		}
+			
+	};
+	
+	//The method that allows adding of employees
+	public Handler insertUsersHandler = (ctx) -> {
+		
+		if(ctx.req.getSession() != null) {
+			String body = ctx.body();
+			
+			Gson gson = new Gson();
+			
+			User user = gson.fromJson(body, User.class);
+			
+			us.addUser(user);
+			
+			ctx.result("Employee was successfully added to the table!");
+			ctx.status(201);		
+			
+		}else {
+			ctx.result("Something went wrong adding a new user");
+			ctx.status(404);
 		}
 			
 	};
