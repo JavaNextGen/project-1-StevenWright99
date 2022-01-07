@@ -86,7 +86,7 @@ import com.revature.services.UserService;
 public class Menu {
 	
 	UserDAO uDAO = new UserDAO(); //we need to instatiate this object bc we need to use methods from UserDAO
-	UserService es = new UserService();
+	UserService us = new UserService();
 
 	//All of the menu options and control flow are contained within this method
 	public void displayMenu() {
@@ -162,7 +162,7 @@ public class Menu {
 			//Given all of this info, we'll create a new user object to send to the service layer
 			//Then the service layer will send it to the repository layer
 			User newUser = new User(username, password, fname, lname, email, role_id); 
-			es.addUser(newUser);
+			us.addUser(newUser);
 			
 			break;
 			

@@ -24,18 +24,18 @@ public class AbstractUser {
     private int id;
     private String username;
     private String password;
-    private Role role;
+    //private Role role;
 
     public AbstractUser() {
         super();
     }
 
-    public AbstractUser(int id, String username, String password, Role role) {
+    public AbstractUser(int id, String username, String password) {
         super();
         this.id = id;
         this.username = username;
         this.password = password;
-        this.role = role;
+        //this.role = role;
     }
 
     public int getId() {
@@ -62,25 +62,47 @@ public class AbstractUser {
         this.password = password;
     }
 
-    public Role getRole() {
-        return role;
-    }
+//    public Role getRole() {
+//        return role;
+//    }
+//
+//    public void setRole(Role role) {
+//        this.role = role;
+//    }
 
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        AbstractUser that = (AbstractUser) o;
+//        return id == that.id && Objects.equals(username, that.username) && Objects.equals(password, that.password) && role == that.role;
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(id, username, password, role);
+//    }
+//
+//    @Override
+//    public String toString() {
+//        return "AbstractUser{" +
+//                "id=" + id +
+//                ", username='" + username + '\'' +
+//                ", password='" + password + '\'' +
+//                ", role=" + role +
+//                '}';
+//    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AbstractUser that = (AbstractUser) o;
-        return id == that.id && Objects.equals(username, that.username) && Objects.equals(password, that.password) && role == that.role;
+        return id == that.id && Objects.equals(username, that.username) && Objects.equals(password, that.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, password, role);
+        return Objects.hash(id, username, password);
     }
 
     @Override
@@ -89,7 +111,8 @@ public class AbstractUser {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", role=" + role +
                 '}';
     }
+
+
 }

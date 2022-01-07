@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.revature.models.User;
@@ -33,6 +34,15 @@ public class UserService {
 	//THE CODE YOU WROTE
 	
 	UserDAO uDAO = new UserDAO(); //so that I can use the methods from UserDAO
+	
+	public List<User> getUsers() {
+		
+		//get the List of users be calling the DAO method that selects them from the database
+		List<User> users = uDAO.getUsers();
+		
+		//returns the list of employees
+		return users;
+	} 
 	
 	public void addUser(User newUser) {
 		
