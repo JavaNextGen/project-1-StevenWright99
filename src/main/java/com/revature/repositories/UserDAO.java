@@ -107,8 +107,8 @@ public class UserDAO {
 //	
 //	
 	
-	///TEST DELETE LATER
-public List<User> getUsers() { //This will use SQL SELECT functionality
+	///This methods selects all users from the database
+	public List<User> getUsers() { //This will use SQL SELECT functionality
 		
 		try(Connection conn = ConnectionFactory.getConnection()){ //all of my SQL stuff will be within this try block
 			
@@ -116,14 +116,8 @@ public List<User> getUsers() { //This will use SQL SELECT functionality
 			ResultSet rs = null;
 			
 			//write the query that we want to send to the database, and assign it to a String
-			
-			//WHAT IS SUPPOSED TO WORK
 			String sql = "SELECT * FROM ers_users;";
-			
-			//WHAT ACTUALLY  WORKS
-			//String sql = "SELECT * FROM employees;";
-			
-			
+					
 			//Put the SQL query into a Statement object (The Connection object has a method for this!!)
 			Statement statement = conn.createStatement();
 			
@@ -169,6 +163,99 @@ public List<User> getUsers() { //This will use SQL SELECT functionality
 		//(Since there's no guarantee that the try will run)
 		
 	}
+	
+	
+	
+	public Optional<String> getByUsername() { //This will use SQL SELECT functionality
+		
+		try(Connection conn = ConnectionFactory.getConnection()){ //all of my SQL stuff will be within this try block
+			
+			//Initialize an empty ResultSet object that will store the results of our SQL query
+			ResultSet rs = null;
+			
+			//write the query that we want to send to the database, and assign it to a String
+			
+			//WHAT IS SUPPOSED TO WORK
+			String sql = "SELECT ers_username FROM ers_users;";
+					
+			//Put the SQL query into a Statement object (The Connection object has a method for this!!)
+			Statement statement = conn.createStatement();
+			
+			//EXECUTE THE QUERY, by putting the results of the query into our ResultSet object
+			//The Statement object has a method that takes Strings to execute as a SQL query
+			rs = statement.executeQuery(sql);
+			
+			//All the code above makes a call to your database
+		
+			while(rs.next()) {
+				User unames = new User(
+						rs.getString("ers_username")
+						);
+				
+				Optional<String> username = Optional.ofNullable(unames.getUsername());
+				System.out.println(username);
+			}
+			
+			
+			
+			
+			
+			return Optional.ofNullable("yo");
+			
+		} catch (SQLException e) {
+			System.out.println("Something went wrong selecting employees!");
+			e.printStackTrace();
+		}
+		
+		return null; //we add this after the try/catch block, so Java won't yell
+		//(Since there's no guarantee that the try will run)
+		
+	}
+	
+
+	//~~~~~~~~~~~~~~~~~~~~First try at Optionals~~~~~~~~~~~~~~~~~`
+	
+//public Optional<User> getUserByUsername() {
+//		
+//		try(Connection conn = ConnectionFactory.getConnection()) {
+//			
+//			ResultSet rs = null;
+//			
+//			String sql = "SELECT ers_username FROM ers_users";
+//			
+//			Statement statement = conn.createStatement();
+//			
+//			rs =statement.executeQuery(sql);
+//			
+//			Optional<User> usernameList = Optional.empty();
+//			
+//			while(rs.next()) {
+//		
+//				//Use the all args constructor to create a new Employee object from each returned row from the ers_username column
+//				User uname = new User(
+//						//we want to use rs.get for each column in the record
+//						rs.getString("ers_username")
+//						);
+//				
+//				//and populate the Optional? with each new User object
+//				usernameList.isPresent(); //this will carry out if the username is present
+//				usernameList.isEmpty();
+//		
+//			}
+//						
+//			//when there are no more results in rs, the while loop will break
+//			//then, return the populated ArrayList of Employees
+//			return Optional.ofNullable(uname);
+//		
+//		}catch (SQLException e) {
+//			System.out.println("Something went wrong selecting this specific user");
+//			e.printStackTrace();
+//		}
+//		
+//		return Optional.ofNullable(null);
+//	};
+	
+	
 
 	//This method takes in a User object called newUser and will insert it into my database
 	//This was established in the menu class under the add option, and then built upon in the UserService class and this class (UserDAO) for layered functionality
@@ -205,6 +292,8 @@ public List<User> getUsers() { //This will use SQL SELECT functionality
 			e.printStackTrace();
 		}
 	}
+	
+	
 	
 }
 

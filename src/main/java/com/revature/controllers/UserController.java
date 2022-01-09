@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.google.gson.Gson;
 import com.revature.models.User;
@@ -37,13 +38,33 @@ public class UserController {
 			
 		}else {
 			ctx.result("You failed to get the employees");
-			ctx.status(404);
+			ctx.status(401);
 			
 		}
 			
 	};
 	
-	//The method that allows adding of employees
+	//This method pulls up employees by username
+		public Handler getUserByUsername = (ctx) -> {
+			
+			if(ctx.req.getSession() != null) {
+				Optional<String> username = us.getByUsername();
+				
+				Gson gson = new Gson();
+				
+				String JSONUserByUsername = gson.toJson(username);
+				
+				ctx.result("Hello user " + JSONUserByUsername);
+				ctx.status(200);
+				
+				
+			}else {
+				ctx.result("An error occured retrieving employee by username");
+				ctx.status(404);
+			}
+		};
+	
+	//This method that allows adding of employees
 	public Handler insertUsersHandler = (ctx) -> {
 		
 		if(ctx.req.getSession() != null) {
@@ -53,7 +74,7 @@ public class UserController {
 			
 			User user = gson.fromJson(body, User.class);
 			
-			us.addUser(user);
+			us.insertUser(user);
 			
 			ctx.result("Employee was successfully added to the table!");
 			ctx.status(201);		
@@ -64,4 +85,6 @@ public class UserController {
 		}
 			
 	};
+	
+	
 }

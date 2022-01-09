@@ -93,7 +93,15 @@ public class User extends AbstractUser{
 //	}
     
     
-    public int getRole_Id() {
+    public User(String username) {
+		// TODO Auto-generated const ructor stub
+    	super(username);
+    	
+	}
+
+
+
+	public int getRole_Id() {
         return role_id;
     }
 

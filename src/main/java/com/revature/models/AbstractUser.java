@@ -37,6 +37,11 @@ public class AbstractUser {
         this.password = password;
         //this.role = role;
     }
+    
+    //New constructor to maybe get the Optional getUserById to work
+    public AbstractUser(String username ) {
+    	this.username = username;
+    }
 
     public int getId() {
         return id;

@@ -56,4 +56,35 @@ public class AuthService {
     public Optional<User> exampleRetrieveCurrentUser() {
         return Optional.empty();
     }
+    
+    
+    
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //THIS IS FROM BEN'S DEMOS EARLIER IN THE DAY
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    
+    //hardcoding username/password - which you won't do in P1
+    
+    //typically, you'll want to validate username/password against tsome username/password in the DATAbase
+    //So in your P!, you'd be sending the data sent into the LoginDTO...
+    //and most likely doing some DAO method the uses those values to check for matching values in the DB
+    //soooooooo we probably need a DAO  method that has something like SELECT * from users where username = ? and password = ?
+    //...and then insert the values of the DTO for parameters
+    
+    //This is hardcoding. Don't do this. You will do something similar with a DAO method that will tkae a username and password and return true is the user/pass combo exists
+    
+//    public boolean login(String username, String password) {
+//    	
+//    	//this is hardcoding - telling java exactly what values make for a valid login
+//    	//in reality, you'll check the database for a username/password to see if a record exists
+//    	
+//    	if(username.equals("user") && password.equals("password")) {
+//    		
+//    		return true; //true indicates successful login
+//    	}
+//    	
+//    	return false; //unsuccessful
+//    }
+    
 }
+    

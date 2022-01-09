@@ -3,6 +3,7 @@ package com.revature;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import com.revature.controllers.AuthController;
 import com.revature.controllers.UserController;
 import com.revature.models.Menu;
 import com.revature.models.Role;
@@ -23,8 +24,10 @@ public class Driver {
     		System.out.println("Connection failed");
     		e.printStackTrace();
     	}  
-    	
+    	  	
+    	//Instantiating controller objects use their methods
     	UserController uc = new UserController();
+    	AuthController ac = new AuthController();
        	    	    	
     	Javalin app = Javalin.create(
 				config -> {
@@ -37,6 +40,12 @@ public class Driver {
     	
     	//This adds employees to the employee list
     	app.post("/employee", uc.insertUsersHandler);
+    	
+    	//Handler ending in /login to send a
+    //	app.post("login", ac.loginHandler);
+    	
+    	//Handler to retrieve employee based on username
+    	app.get("/employee/{username}", uc.getUserByUsername);
     	
     }
     
