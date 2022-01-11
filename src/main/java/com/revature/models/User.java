@@ -1,6 +1,6 @@
 package com.revature.models;
 
-import java.util.Scanner;
+
 
 /**
  * This concrete User class can include additional fields that can be used for

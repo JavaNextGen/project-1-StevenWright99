@@ -1,6 +1,8 @@
 package com.revature.services;
 
+import com.revature.models.LoginDTO;
 import com.revature.models.User;
+import com.revature.repositories.UserDAO;
 
 import java.util.Optional;
 
@@ -27,9 +29,9 @@ public class AuthService {
      *     <li>Must return user object if the user logs in successfully.</li>
      * </ul>
      */
-    public User login(String username, String password) {
-        return null;
-    }
+//    public User login(String username, String password) {
+//        return null;
+//    }
 
     /**
      * <ul>
@@ -65,9 +67,9 @@ public class AuthService {
     
     //hardcoding username/password - which you won't do in P1
     
-    //typically, you'll want to validate username/password against tsome username/password in the DATAbase
+    //typically, you'll want to validate username/password against some username/password in the DATAbase
     //So in your P!, you'd be sending the data sent into the LoginDTO...
-    //and most likely doing some DAO method the uses those values to check for matching values in the DB
+    //and most likely doing some DAO method that uses those values to check for matching values in the DB
     //soooooooo we probably need a DAO  method that has something like SELECT * from users where username = ? and password = ?
     //...and then insert the values of the DTO for parameters
     
@@ -85,6 +87,30 @@ public class AuthService {
 //    	
 //    	return false; //unsuccessful
 //    }
+    
+    
+    
+    UserDAO uDAO = new UserDAO();
+    
+    public Optional<LoginDTO> login(String username) {
+		
+		
+    	//EILISE CODE
+    	if(uDAO.login(username).isPresent()) {
+    		
+    		LoginDTO login = new LoginDTO();
+    		
+    		login.setUsername(username);
+    		System.out.println(login);
+    		
+    		
+    		return Optional.ofNullable(uDAO.login(username).get());
+    		
+    	} else return Optional.ofNullable(null);
+    	
+    //   EILISE CODE
+    	}
+    	
     
 }
     

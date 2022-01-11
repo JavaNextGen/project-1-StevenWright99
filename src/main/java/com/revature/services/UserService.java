@@ -21,7 +21,11 @@ import com.revature.repositories.UserDAO;
  *     <li>Get All Users</li> 
  * </ul>
  */
+
+
 public class UserService {
+	
+	UserDAO uDAO = new UserDAO();
 
 	/**
 	 *     Should retrieve a User with the corresponding user name or an empty optional if there is no match.
@@ -29,14 +33,25 @@ public class UserService {
 	
 	
 	
-	public Optional<String> getByUsername() {
+	
+	public Optional<User> getByUsername(String username) {
 		
-		//CAlling the DAO list that was created
-		Optional<String> usernames = uDAO.getByUsername();
+			
+	//EILISE CODE
+	if(uDAO.getByUsername(username).isPresent()) {
 		
-		return usernames;
-		//return Optional.empty();
+		//User user = new User();
+		
+	//	user.setUsername(username);
+		
+		
+		return Optional.ofNullable(uDAO.getByUsername(username).get()); 
+		
+	} else return Optional.ofNullable(null);
+	
+//   EILISE CODE
 	}
+	
 	
 	
 	
@@ -45,7 +60,7 @@ public class UserService {
 	
 	//This method is for retrieving a list of users
 	
-	UserDAO uDAO = new UserDAO(); //so that I can use the methods from UserDAO
+	 //so that I can use the methods from UserDAO
 	
 	public List<User> getUsers() {
 		

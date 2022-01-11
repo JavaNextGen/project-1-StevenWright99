@@ -27,6 +27,12 @@ public class LoginDTO {
 		this.username = username;
 		this.password = password;
 	}
+	
+	public LoginDTO(String username) {
+		super();
+		this.username = username;
+	}
+	
 
 	//Also generate getters and setters in order to access our fields
 

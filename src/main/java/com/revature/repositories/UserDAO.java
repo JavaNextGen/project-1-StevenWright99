@@ -1,5 +1,6 @@
 package com.revature.repositories;
 
+import com.revature.models.LoginDTO;
 //import com.revature.models.User;
 import com.revature.models.User;
 import com.revature.util.ConnectionFactory;
@@ -164,9 +165,43 @@ public class UserDAO {
 		
 	}
 	
+	//~~~~~~~~~~~~~~~~~~~~
+	//login
+	//~~~~~~~~~~~~~~~~~~~~~~
+	
+	public Optional<LoginDTO> login(String username) {
+		
+		try(Connection conn = ConnectionFactory.getConnection()){ //all of my SQL stuff will be within this try block
+			
+			ResultSet rs = null;
+			//WHAT IS SUPPOSED TO WORK
+			String sql = "SELECT * FROM ers_users WHERE ers_username = ? ";
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			
+			LoginDTO log = new LoginDTO();
+			
+			ps.setString(1, log.getUsername());
+			
+			
+		//	System.out.println();
+			return Optional.ofNullable();
+				
+			
+			}catch (SQLException e) {
+				System.out.println("Uh oh");
+				e.printStackTrace();
+			}
+		
+		
+		return null;
+		}
+
+
+
 	
 	
-	public Optional<String> getByUsername() { //This will use SQL SELECT functionality
+	public Optional<User> getByUsername2(String username) { //This will use SQL SELECT functionality
 		
 		try(Connection conn = ConnectionFactory.getConnection()){ //all of my SQL stuff will be within this try block
 			
@@ -176,38 +211,44 @@ public class UserDAO {
 			//write the query that we want to send to the database, and assign it to a String
 			
 			//WHAT IS SUPPOSED TO WORK
-			String sql = "SELECT ers_username FROM ers_users;";
+			String sql = "SELECT * FROM ers_users WHERE ers_username = ? ";
 					
 			//Put the SQL query into a Statement object (The Connection object has a method for this!!)
-			Statement statement = conn.createStatement();
+			PreparedStatement ps = conn.prepareStatement(sql);
 			
 			//EXECUTE THE QUERY, by putting the results of the query into our ResultSet object
 			//The Statement object has a method that takes Strings to execute as a SQL query
-			rs = statement.executeQuery(sql);
-			
+			//PS
+	
 			//All the code above makes a call to your database
 		
+			ps.setString(1, username);
+			rs = ps.executeQuery();
 			while(rs.next()) {
 				User unames = new User(
-						rs.getString("ers_username")
+						rs.getString("ers_username"),
+						rs.getString("ers_password"),
+						rs.getString("user_first_name"),
+						rs.getString("user_last_name"),
+						rs.getString("user_email"),
+						rs.getInt("ers_users_id"),
+						rs.getInt("ers_user_role_id")
 						);
 				
-				Optional<String> username = Optional.ofNullable(unames.getUsername());
-				System.out.println(username);
+				System.out.println(unames);
+				
+				return Optional.ofNullable(unames);
+				
+			
 			}
-			
-			
-			
-			
-			
-			return Optional.ofNullable("yo");
-			
+		
+				
 		} catch (SQLException e) {
 			System.out.println("Something went wrong selecting employees!");
 			e.printStackTrace();
 		}
 		
-		return null; //we add this after the try/catch block, so Java won't yell
+		return Optional.ofNullable(null); //we add this after the try/catch block, so Java won't yell
 		//(Since there's no guarantee that the try will run)
 		
 	}
@@ -295,7 +336,59 @@ public class UserDAO {
 	
 	
 	
+	
+	
+	
+	
+	public Optional<String> getByUsername() { //This will use SQL SELECT functionality
+
+		try(Connection conn = ConnectionFactory.getConnection()){ //all of my SQL stuff will be within this try block
+
+			//Initialize an empty ResultSet object that will store the results of our SQL query
+			ResultSet rs = null;
+
+			//write the query that we want to send to the database, and assign it to a String
+
+			//WHAT IS SUPPOSED TO WORK
+			String sql = "SELECT ers_username FROM ers_users;";
+
+			//Put the SQL query into a Statement object (The Connection object has a method for this!!)
+			Statement statement = conn.createStatement();
+
+			//EXECUTE THE QUERY, by putting the results of the query into our ResultSet object
+			//The Statement object has a method that takes Strings to execute as a SQL query
+			rs = statement.executeQuery(sql);
+
+			//All the code above makes a call to your database
+
+			while(rs.next()) {
+				User unames = new User(
+						rs.getString("ers_username")
+						);
+
+				Optional<String> username = Optional.ofNullable(unames.getUsername());
+				System.out.println(username);
+			}
+
+
+
+
+
+			return Optional.ofNullable("yo");
+
+		} catch (SQLException e) {
+			System.out.println("Something went wrong selecting employees!");
+			e.printStackTrace();
+		}
+
+		return null; //we add this after the try/catch block, so Java won't yell
+		//(Since there's no guarantee that the try will run)
+
+	}
+
+	
 }
+
 
 
 

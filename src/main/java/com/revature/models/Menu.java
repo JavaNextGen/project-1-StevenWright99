@@ -75,11 +75,7 @@
 
 package com.revature.models;
 
-import java.util.List;
-import java.util.Scanner;
 
-import com.revature.repositories.UserDAO;
-import com.revature.services.UserService;
 
 //This MEnu Class will have a displayMenu() method that displays the menu to the user and lets them interact with it
 //The menu will make use of the Scanner Class to take user inputs in order to travel through the menu options
