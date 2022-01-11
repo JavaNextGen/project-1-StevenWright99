@@ -173,7 +173,6 @@ public class UserDAO {
 		
 		try(Connection conn = ConnectionFactory.getConnection()){ //all of my SQL stuff will be within this try block
 			
-			ResultSet rs = null;
 			//WHAT IS SUPPOSED TO WORK
 			String sql = "SELECT * FROM ers_users WHERE ers_username = ? ";
 
@@ -181,11 +180,11 @@ public class UserDAO {
 			
 			LoginDTO log = new LoginDTO();
 			
-			ps.setString(1, log.getUsername());
+			ps.setString(1, username);
 			
 			
-		//	System.out.println();
-			return Optional.ofNullable();
+			System.out.println(username);
+			return Optional.ofNullable(log);
 				
 			
 			}catch (SQLException e) {
@@ -194,7 +193,7 @@ public class UserDAO {
 			}
 		
 		
-		return null;
+		return Optional.ofNullable(null);
 		}
 
 
