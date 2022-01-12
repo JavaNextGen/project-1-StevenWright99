@@ -146,6 +146,7 @@ public class UserDAO {
 						rs.getInt("ers_user_role_id")
 						);
 				
+				
 				//and populate the ArrayList with each new Employee object
 				userList.add(u); //e is the new Employee object we created above
 		
@@ -169,38 +170,49 @@ public class UserDAO {
 	//login
 	//~~~~~~~~~~~~~~~~~~~~~~
 	
-	public Optional<LoginDTO> login(String username) {
+	public Boolean login(String username) {
+		
+		LoginDTO login = new LoginDTO();
 		
 		try(Connection conn = ConnectionFactory.getConnection()){ //all of my SQL stuff will be within this try block
 			
-			//WHAT IS SUPPOSED TO WORK
-			String sql = "SELECT * FROM ers_users WHERE ers_username = ? ";
-
-			PreparedStatement ps = conn.prepareStatement(sql);
+			PreparedStatement ps = null;
+			ResultSet rs = null;
 			
-			LoginDTO log = new LoginDTO();
-			
+			String sql = "SELECT * FROM ers_users WHERE ers_username = ? ";		
+			ps = conn.prepareStatement(sql);
 			ps.setString(1, username);
+		//  ps.setString(2, password);
 			
 			
-			System.out.println(username);
-			return Optional.ofNullable(log);
+			
+			rs = ps.executeQuery();
+				if(rs.next()) {
+					System.out.println(rs.getString(1));
+					System.out.println("User found");
+					return true;
+					
+				}else {
+					System.out.println("User not found");
+					return false;
+				}
+			
 				
-			
+						
 			}catch (SQLException e) {
 				System.out.println("Uh oh");
 				e.printStackTrace();
 			}
 		
+		return false;
 		
-		return Optional.ofNullable(null);
 		}
 
 
 
 	
 	
-	public Optional<User> getByUsername2(String username) { //This will use SQL SELECT functionality
+	public Optional<User> getByUsername(String username) { //This will use SQL SELECT functionality
 		
 		try(Connection conn = ConnectionFactory.getConnection()){ //all of my SQL stuff will be within this try block
 			
@@ -213,17 +225,22 @@ public class UserDAO {
 			String sql = "SELECT * FROM ers_users WHERE ers_username = ? ";
 					
 			//Put the SQL query into a Statement object (The Connection object has a method for this!!)
-			PreparedStatement ps = conn.prepareStatement(sql);
+			//PreparedStatement ps = conn.prepareStatement(sql);
+			
+			Statement st = conn.createStatement();
 			
 			//EXECUTE THE QUERY, by putting the results of the query into our ResultSet object
 			//The Statement object has a method that takes Strings to execute as a SQL query
 			//PS
 	
 			//All the code above makes a call to your database
-		
-			ps.setString(1, username);
-			rs = ps.executeQuery();
-			while(rs.next()) {
+//		
+//			ps.setString(1, username);
+			
+			System.out.println("Break 1");
+//					
+			rs = st.executeQuery(sql);
+			if(rs.next()) {
 				User unames = new User(
 						rs.getString("ers_username"),
 						rs.getString("ers_password"),
@@ -234,6 +251,7 @@ public class UserDAO {
 						rs.getInt("ers_user_role_id")
 						);
 				
+				System.out.println("Break 2");
 				System.out.println(unames);
 				
 				return Optional.ofNullable(unames);

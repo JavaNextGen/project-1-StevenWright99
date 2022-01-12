@@ -38,10 +38,10 @@ public class Driver {
     	app.post("/employee", uc.insertUsersHandler);
     	
     	//Handler ending in /login to send a
-    	app.post("login", ac.loginHandler);
+    	app.post("/login", ac.loginHandler);
     	
     	//Handler to retrieve employee based on username
-    	//app.get("/employee/{username}", uc.getUserByUsername);
+    	app.get("/employee/{username}", uc.getUserByUsername);
     	
     }
     

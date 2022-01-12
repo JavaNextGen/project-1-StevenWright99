@@ -92,25 +92,18 @@ public class AuthService {
     
     UserDAO uDAO = new UserDAO();
     
-    public Optional<LoginDTO> login(String username) {
+    public boolean login(String username) {
 		
-		
-    	//EILISE CODE
-    	if(uDAO.login(username).isPresent()) {
-    		
-    		LoginDTO login = new LoginDTO();
-    		
-    		login.setUsername(username);
-    		System.out.println(login);
-    		
-    		
-    		return Optional.ofNullable(uDAO.login(username).get());
-    		
-    	} else return Optional.ofNullable(null);
+    	boolean login = uDAO.login(username);
     	
-    //   EILISE CODE
-    	}
+    	return login;
     	
-    
+    	//Only work for username user
+//    	if(username.equals("user")) {
+//    		return true;
+//    	}
+//    
+//    	return false;
+    }
 }
     

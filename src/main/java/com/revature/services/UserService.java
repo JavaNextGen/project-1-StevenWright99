@@ -31,21 +31,22 @@ public class UserService {
 	 *     Should retrieve a User with the corresponding user name or an empty optional if there is no match.
      */
 	
-	
-	
-	
 	public Optional<User> getByUsername(String username) {
 		
 			
 	//EILISE CODE
+		
+//	If the user's username is present in the databse, return the username		
 	if(uDAO.getByUsername(username).isPresent()) {
+		System.out.println(username);
 		
-		//User user = new User();
+		User user = new User();
 		
-	//	user.setUsername(username);
+		user.setUsername(username);
 		
 		
-		return Optional.ofNullable(uDAO.getByUsername(username).get()); 
+		return(Optional.ofNullable(user));
+		//return Optional.ofNullable(uDAO.getByUsername(username).get()); 
 		
 	} else return Optional.ofNullable(null);
 	

@@ -68,7 +68,7 @@ public class AuthController {
 		
 		//control flow to determine what happens in the event of of a successful/ unsuccessful login
 		//invoke the login() method of the AuthSerivec using the username  and password from the LoginDTO
-		if(as.login(LDTO.getUsername()) != null) {
+		if(as.login(LDTO.getUsername())) {
 			//if true (in future this meaning username and password exist in the database), then create a user session
 			
 			
@@ -85,7 +85,7 @@ public class AuthController {
 		}else {
 			
 			ctx.status(401); //UNAUTHORIZZZZEEEEDDDDDD
-			ctx.result("Login unseccussful");
+			ctx.result("Login unsuccessful");
 		}
 	};
 }
