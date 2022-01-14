@@ -27,7 +27,7 @@ public class Reimbursement extends AbstractReimbursement {
 //        super(id, status, author, resolver, amount);
 //    }
     
-    public Reimbursement(int id, double amount, String status, String author, String resolver) {
+    public Reimbursement(int id, double amount, int status, int author, int resolver) {
         super(id, amount, status, author, resolver);
     }
 }

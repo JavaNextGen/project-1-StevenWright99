@@ -275,8 +275,8 @@ public void submitRequest(Reimbursement newReimbursement) {
 			
 			
 			//we'll create a SQL statement using parameters to insert a new User
-			String sql = "INSERT INTO ers_reimbursement(reimb_amount, reimb_status_id, reimb_author, reimb_resolver) " //ers_user_role_id
-					+ "VALUES (?, ?, ?, ?); "; //the ?s are parameters, which means we have to specify the value of each '?' How? PreparedStatement
+			String sql = "INSERT INTO ers_reimbursement(reimb_amount, reimb_status_id, reimb_author) " //ers_user_role_id
+					+ "VALUES (?, ?, ?); "; //the ?s are parameters, which means we have to specify the value of each '?' How? PreparedStatement
 			
 			PreparedStatement ps = conn.prepareStatement(sql); //we use PS for SQL commands with variables
 			
@@ -284,9 +284,8 @@ public void submitRequest(Reimbursement newReimbursement) {
 			//the values will come from the User object we send in
 			//ps.setInt(1, newReimbursement.getId());
 			ps.setDouble(1, newReimbursement.getAmount());		
-			ps.setString(2, newReimbursement.getStatus());
-			ps.setString(3, newReimbursement.getAuthor());	
-			ps.setString(4, newReimbursement.getResolver());
+			ps.setInt(2, newReimbursement.getStatus());
+			ps.setInt(3, newReimbursement.getAuthor());	
 		
 			
 			//this executeUpdate method sends and executes the SQL command we built
@@ -294,7 +293,7 @@ public void submitRequest(Reimbursement newReimbursement) {
 			//we use executeQuery() for selects
 			
 			//send confirmation to the console if successful
-			System.out.println("Reimbursement " + newReimbursement.getId() + " has been successfully submitted");
+			System.out.println("Reimbursement " + newReimbursement.getAuthor() + " has been successfully submitted");
 			
 			
 			
