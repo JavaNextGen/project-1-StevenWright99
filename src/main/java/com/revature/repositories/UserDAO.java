@@ -1,6 +1,7 @@
 package com.revature.repositories;
 
 import com.revature.models.LoginDTO;
+import com.revature.models.Reimbursement;
 //import com.revature.models.User;
 import com.revature.models.User;
 import com.revature.util.ConnectionFactory;
@@ -37,76 +38,6 @@ public class UserDAO {
 //        return userToBeRegistered;
 //    }
 	
-//		public List<User> getUsers() { //This will use SQL SELECT functionality
-//			
-//			try(Connection conn = ConnectionFactory.getConnection()){ //all of my SQL stuff gies in this try block
-//				
-//			//Initialize an empty resultSet object to store the results of our SQL query
-//			ResultSet rs = null;
-//			
-//			//write the query that we want to send to the database, and assign it to a String
-//			String sql = "SELECT * FROM employees;";
-//			
-//			//Put the SQL query into a statement object (The Connection object has a method for this)
-//			Statement statement = conn.createStatement();
-//			
-//			//EXECUTE the QUERY, by putting the results of the query into our ResltSet object
-//			//The statement object has a method that takes Strings to execute as a a SQL qurey
-//			
-//			rs = statement.executeQuery(sql);
-//			
-//			//All the code above makes a coll to your database.. now we need to store the data in an ArrayList
-//			
-//			//create an empty List to be filled with the data from the database
-//			List<User> userList = new ArrayList<>();
-//			
-//			//While there are results in the ResultSet...
-//			while(rs.next()) {
-//				
-//				//Use the all-args constructor to create a new User object from each returned row from the DB
-//				User u = new User(
-//						//we want to use rs.get for each column in the record
-////						
-//						
-//						//Test code -remove later
-//						rs.getInt("employee_id"),
-//						rs.getString("f_name"),
-//						rs.getString("l_name"),
-//						rs.getInt("role_id")
-//						);
-//						//Test code - remove later
-//						
-//						
-//						
-//						
-//						
-//		//				rs.getInt("ers_users_id"),
-////						rs.getString("ers_username"),
-////						rs.getString("ers_password"),
-////						rs.getString("user_first_name"),
-////						rs.getString("user_last_name"),
-////						rs.getString("user_email")			
-////						);
-//				
-//				//and the populate the ArrayList with each new Employee object
-////				userList.add(u); //u  is the new employee/user object we created above
-//			}
-//			
-//			//when there are no more results in the rs, the while loop will break
-//			return userList;
-//			
-//				
-//				
-//			}catch (SQLException e) {
-//				System.out.println("Something went wrong selcting users");
-//				e.printStackTrace();
-//			}
-//			
-//			return null; //we add this after the try/catch block, so Java won't yell;
-//			//Since there's no guarantee that the try will run
-//		}
-//	
-//	
 	
 	///This methods selects all users from the database
 	public List<User> getUsers() { //This will use SQL SELECT functionality
@@ -170,7 +101,7 @@ public class UserDAO {
 	//login
 	//~~~~~~~~~~~~~~~~~~~~~~
 	
-	public Boolean login(String username) {
+	public Boolean login(String username, String password) {
 		
 		LoginDTO login = new LoginDTO();
 		
@@ -179,16 +110,17 @@ public class UserDAO {
 			PreparedStatement ps = null;
 			ResultSet rs = null;
 			
-			String sql = "SELECT * FROM ers_users WHERE ers_username = ? ";		
+			String sql = "SELECT * FROM ers_users WHERE ers_username = ? and ers_password = ? ";		
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, username);
-		//  ps.setString(2, password);
+		    ps.setString(2, password);
 			
 			
 			
 			rs = ps.executeQuery();
 				if(rs.next()) {
 					System.out.println(rs.getString(1));
+					System.out.println(rs.getString(2));
 					System.out.println("User found");
 					return true;
 					
@@ -217,29 +149,14 @@ public class UserDAO {
 		try(Connection conn = ConnectionFactory.getConnection()){ //all of my SQL stuff will be within this try block
 			
 			//Initialize an empty ResultSet object that will store the results of our SQL query
+			PreparedStatement ps = null;
 			ResultSet rs = null;
-			
-			//write the query that we want to send to the database, and assign it to a String
-			
-			//WHAT IS SUPPOSED TO WORK
+		
 			String sql = "SELECT * FROM ers_users WHERE ers_username = ? ";
-					
-			//Put the SQL query into a Statement object (The Connection object has a method for this!!)
-			//PreparedStatement ps = conn.prepareStatement(sql);
-			
-			Statement st = conn.createStatement();
-			
-			//EXECUTE THE QUERY, by putting the results of the query into our ResultSet object
-			//The Statement object has a method that takes Strings to execute as a SQL query
-			//PS
-	
-			//All the code above makes a call to your database
-//		
-//			ps.setString(1, username);
-			
-			System.out.println("Break 1");
-//					
-			rs = st.executeQuery(sql);
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, username);
+							
+			rs = ps.executeQuery();
 			if(rs.next()) {
 				User unames = new User(
 						rs.getString("ers_username"),
@@ -251,12 +168,10 @@ public class UserDAO {
 						rs.getInt("ers_user_role_id")
 						);
 				
-				System.out.println("Break 2");
 				System.out.println(unames);
 				
 				return Optional.ofNullable(unames);
-				
-			
+	
 			}
 		
 				
@@ -351,13 +266,49 @@ public class UserDAO {
 		}
 	}
 	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//SUBMIT REQUESTS
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+public void submitRequest(Reimbursement newReimbursement) {
+		
+		try(Connection conn = ConnectionFactory.getConnection()){
+			
+			
+			//we'll create a SQL statement using parameters to insert a new User
+			String sql = "INSERT INTO ers_reimbursement(reimb_amount, reimb_status_id, reimb_author, reimb_resolver) " //ers_user_role_id
+					+ "VALUES (?, ?, ?, ?); "; //the ?s are parameters, which means we have to specify the value of each '?' How? PreparedStatement
+			
+			PreparedStatement ps = conn.prepareStatement(sql); //we use PS for SQL commands with variables
+			
+			//use the PreparedStatement objects' methods to insert values into the query's ?s
+			//the values will come from the User object we send in
+			//ps.setInt(1, newReimbursement.getId());
+			ps.setDouble(1, newReimbursement.getAmount());		
+			ps.setString(2, newReimbursement.getStatus());
+			ps.setString(3, newReimbursement.getAuthor());	
+			ps.setString(4, newReimbursement.getResolver());
+		
+			
+			//this executeUpdate method sends and executes the SQL command we built
+			ps.executeUpdate(); //we use executeUpdate for inserts, updates, and deletes
+			//we use executeQuery() for selects
+			
+			//send confirmation to the console if successful
+			System.out.println("Reimbursement " + newReimbursement.getId() + " has been successfully submitted");
+			
+			
+			
+		} catch(SQLException e) {
+			System.out.println("Failed to add new Reimbursement");
+			e.printStackTrace();
+		}
+	}
 	
 	
 	
 	
 	
-	
-	public Optional<String> getByUsername() { //This will use SQL SELECT functionality
+	public Optional<String> getByUsernamenotreally() { //This will use SQL SELECT functionality
 
 		try(Connection conn = ConnectionFactory.getConnection()){ //all of my SQL stuff will be within this try block
 

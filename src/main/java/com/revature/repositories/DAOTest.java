@@ -11,7 +11,7 @@ import java.util.Scanner;
 import com.revature.models.User;
 import com.revature.util.ConnectionFactory;
 
-public class bullshit {
+public class DAOTest {
 	
 	public static void main(String[] args) {
 		

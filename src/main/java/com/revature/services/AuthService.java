@@ -92,9 +92,9 @@ public class AuthService {
     
     UserDAO uDAO = new UserDAO();
     
-    public boolean login(String username) {
+    public boolean login(String username, String password) {
 		
-    	boolean login = uDAO.login(username);
+    	boolean login = uDAO.login(username, password);
     	
     	return login;
     	

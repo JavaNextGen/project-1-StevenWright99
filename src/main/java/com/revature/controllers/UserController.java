@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.google.gson.Gson;
 import com.revature.models.LoginDTO;
+import com.revature.models.Reimbursement;
 import com.revature.models.User;
 import com.revature.services.UserService;
 
@@ -22,7 +23,7 @@ public class UserController {
 	
 	//The method that gathers list of employees and converts to GSON
 	public Handler getUsersHandler = (ctx) -> {
-		if(ctx.req.getSession(false) != null) { //This just checks if the session exists
+		if(ctx.req.getSession() != null) { //This just checks if the session exists
 			
 			List<User> allUsers = us.getUsers();
 			
@@ -72,7 +73,7 @@ public class UserController {
 	//This method that allows adding of employees
 	public Handler insertUsersHandler = (ctx) -> {
 		
-		if(ctx.req.getSession(false) != null) {
+		if(ctx.req.getSession() != null) {
 			String body = ctx.body();
 			
 			Gson gson = new Gson();
@@ -86,6 +87,28 @@ public class UserController {
 			
 		}else {
 			ctx.result("Something went wrong adding a new user");
+			ctx.status(404);
+		}
+			
+	};
+	
+	//Handler for employee reimbursement submissions
+	public Handler submitRequestHandler = (ctx) -> {
+		
+		if(ctx.req.getSession() != null) {
+			String body = ctx.body();
+			
+			Gson gson = new Gson();
+			
+			Reimbursement reimbursement = gson.fromJson(body, Reimbursement.class);
+			
+			us.submitRequest(reimbursement);
+			
+			ctx.result("Reimbursement request successfully added");
+			ctx.status(201);		
+			
+		}else {
+			ctx.result("Something went wrong adding your reimbursement request");
 			ctx.status(404);
 		}
 			

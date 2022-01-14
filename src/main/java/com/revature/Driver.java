@@ -43,6 +43,12 @@ public class Driver {
     	//Handler to retrieve employee based on username
     	app.get("/employee/{username}", uc.getUserByUsername);
     	
+    	//Handler to post a reimbursement request
+    	app.post("/employee/submit", uc.submitRequestHandler);
+    	
+    	//Handler to show individual employee's requests
+    	//app.get("/employee/view", uc.viewRequestHandler);
+    	
     }
     
     

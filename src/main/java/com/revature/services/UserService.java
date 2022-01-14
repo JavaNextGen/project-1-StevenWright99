@@ -3,6 +3,7 @@ package com.revature.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.revature.models.Reimbursement;
 import com.revature.models.User;
 import com.revature.repositories.UserDAO;
 
@@ -26,6 +27,7 @@ import com.revature.repositories.UserDAO;
 public class UserService {
 	
 	UserDAO uDAO = new UserDAO();
+	
 
 	/**
 	 *     Should retrieve a User with the corresponding user name or an empty optional if there is no match.
@@ -34,23 +36,17 @@ public class UserService {
 	public Optional<User> getByUsername(String username) {
 		
 			
-	//EILISE CODE
+	//Try CODE
 		
-//	If the user's username is present in the databse, return the username		
-	if(uDAO.getByUsername(username).isPresent()) {
-		System.out.println(username);
+//	If the user's username is present in the database, return the username		
+	
+		Optional<User> user = uDAO.getByUsername(username); 		
 		
-		User user = new User();
-		
-		user.setUsername(username);
-		
-		
-		return(Optional.ofNullable(user));
+		return user;
 		//return Optional.ofNullable(uDAO.getByUsername(username).get()); 
 		
-	} else return Optional.ofNullable(null);
-	
-//   EILISE CODE
+
+//   Try CODE
 	}
 	
 	
@@ -82,9 +78,15 @@ public class UserService {
 		//Done, so now call the DAO method and then call this class (UserService in the menu)
 		
 		uDAO.insertUser(newUser); 
+		
+	}
+	
+	public void submitRequest(Reimbursement newReimbursement) {
+		
+		uDAO.submitRequest(newReimbursement);
+	}
 	
 	
 	
 	
-}
 }
