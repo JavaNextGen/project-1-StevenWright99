@@ -72,8 +72,6 @@ public class UserService {
 	
 	public void insertUser(User newUser) {
 		
-		//take in the user object send from the menu(add user option) and send it to the UserDAO to be inserted into the database
-
 		//we need to write the DAO method that inserts the new USer.... so go do that
 		//Done, so now call the DAO method and then call this class (UserService in the menu)
 		
@@ -87,6 +85,14 @@ public class UserService {
 	}
 	
 	
-	
+//	public List<Reimbursement> getReimbById(int id){
+//		
+//		//List<Reimbursement> reimb = 
+//		uDAO.getReimbById(id);
+//		
+//		return IdList;
+//		
+//		
+//	}
 	
 }

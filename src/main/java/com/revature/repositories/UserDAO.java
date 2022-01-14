@@ -140,6 +140,53 @@ public class UserDAO {
 		
 		}
 
+//		~~~~~~~~~~~~~~~~~~~~
+//		User gets requests by inputting id
+//		~~~~~~~~~~~~~~~~~~~~
+
+//	public List<Reimbursement> getReimbById(int id) {
+//		
+//		try(Connection conn = ConnectionFactory.getConnection()){ //all of my SQL stuff will be within this try block
+//			
+//			PreparedStatement ps = null;
+//			ResultSet rs = null;
+//			
+//			String sql = "SELECT * FROM ers_reimbursement WHERE reimb_author = ? ";		
+//			ps = conn.prepareStatement(sql);
+//			ps.setInt(1, id);
+//			rs=ps.executeQuery();
+//			
+//			List<Reimbursement> IdList = new ArrayList<>();
+//			
+//			while(rs.next()) {
+//				
+//				//Use the all args constructor to create a new Employee object from each returned row from the DB
+//				Reimbursement r = new Reimbursement(
+//						//we want to use rs.get for each column in the record
+//						rs.getDouble("reimb_amount"),
+//						rs.getInt("reimb_status_id")
+//						);
+//				
+//				
+//				//and populate the ArrayList with each new Employee object
+//				IdList.add(r); //e is the new Employee object we created above
+//		
+//			}
+//						
+//			//when there are no more results in rs, the while loop will break
+//			//then, return the populated ArrayList of Employees
+//			return IdList;
+//			
+//				
+//						
+//			}catch (SQLException e) {
+//				System.out.println("Uh oh");
+//				e.printStackTrace();
+//			}
+//		
+//		return null;
+//		
+//		}
 
 
 	
@@ -269,7 +316,7 @@ public class UserDAO {
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//SUBMIT REQUESTS
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-public void submitRequest(Reimbursement newReimbursement) {
+	public void submitRequest(Reimbursement newReimbursement) {
 		
 		try(Connection conn = ConnectionFactory.getConnection()){
 			

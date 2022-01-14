@@ -39,7 +39,12 @@ public class AbstractReimbursement {
         this.status = status;
         this.author = author;
         this.resolver = resolver;
+    }
         
+    public AbstractReimbursement(double amount, int status) {
+        super();
+        this.amount = amount;
+        this.status = status;
     }
 
     public int getId() {

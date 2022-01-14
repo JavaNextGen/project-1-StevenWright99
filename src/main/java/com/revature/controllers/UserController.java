@@ -114,5 +114,27 @@ public class UserController {
 			
 	};
 	
+	//Handler for viewing requests by ID
+//	public Handler getReimbById = (ctx) -> {
+//		
+//		if(ctx.req.getSession() != null) {
+//			String body = ctx.body();
+//			
+//			Gson gson = new Gson();
+//			
+//			User user = gson.fromJson(body, User.class);
+//			
+//			us.insertUser(user);
+//			
+//			ctx.result("Employee was successfully added to the table!");
+//			ctx.status(201);		
+//			
+//		}else {
+//			ctx.result("Something went wrong adding a new user");
+//			ctx.status(404);
+//		}
+//			
+//	};
+	
 	
 }

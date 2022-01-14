@@ -30,5 +30,9 @@ public class Reimbursement extends AbstractReimbursement {
     public Reimbursement(int id, double amount, int status, int author, int resolver) {
         super(id, amount, status, author, resolver);
     }
+    
+    public Reimbursement(double amount, int status) {
+    	super(amount, status);
+    }
 }
 

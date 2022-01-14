@@ -47,7 +47,14 @@ public class Driver {
     	app.post("/employee/submit", uc.submitRequestHandler);
     	
     	//Handler to show individual employee's requests
-    	//app.get("/employee/view", uc.viewRequestHandler);
+    	//app.post("/employee/view/{number}", uc.viewRequestHandler);
+    	
+    	//IN lieu of employees seeing requests by Id, for your frontend, just copy the manager viewing all requests list
+    	
+    	app.post("manager/view", uc.viewAllRequests);
+    	
+    	app.post("manager/status", uc.changeStatus);
+    	//This is update, try in DBeaver first, then copy that method in the DAO
     	
     }
     
