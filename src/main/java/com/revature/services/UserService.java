@@ -85,6 +85,19 @@ public class UserService {
 	}
 	
 	
+	public void updateStatus(Reimbursement newStatus) {
+		
+		uDAO.updateStatus(newStatus);
+	}
+	
+	public List<Reimbursement> viewAllRequests() {
+		
+		List<Reimbursement> viewAll = uDAO.viewAllRequests();
+		
+		return viewAll;
+	}
+	
+	
 //	public List<Reimbursement> getReimbById(int id){
 //		
 //		//List<Reimbursement> reimb = 

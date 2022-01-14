@@ -46,6 +46,14 @@ public class AbstractReimbursement {
         this.amount = amount;
         this.status = status;
     }
+    
+    public AbstractReimbursement(double amount, int author, int status) {
+        super();
+        this.amount = amount;
+        this.author = author;
+        this.status = status;
+        
+    }
 
     public int getId() {
         return id;

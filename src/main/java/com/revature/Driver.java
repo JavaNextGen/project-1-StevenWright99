@@ -51,9 +51,9 @@ public class Driver {
     	
     	//IN lieu of employees seeing requests by Id, for your frontend, just copy the manager viewing all requests list
     	
-    	app.post("manager/view", uc.viewAllRequests);
+    	app.get("manager/view", uc.viewAllRequests);
     	
-    	app.post("manager/status", uc.changeStatus);
+    	app.post("manager/status", uc.updateStatus);
     	//This is update, try in DBeaver first, then copy that method in the DAO
     	
     }

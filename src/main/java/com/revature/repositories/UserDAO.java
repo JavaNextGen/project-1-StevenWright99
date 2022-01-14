@@ -351,55 +351,91 @@ public class UserDAO {
 	}
 	
 	
+	public void updateStatus(Reimbursement newStatus) {
+		
+		try(Connection conn = ConnectionFactory.getConnection()){
+			
+			
+			//we'll create a SQL statement using parameters to insert a new User
+			String sql = "UPDATE ers_reimbursement "
+						+ "SET reimb_status_id = ? "
+						+ "WHERE reimb_author = ? "; //the ?s are parameters, which means we have to specify the value of each '?' How? PreparedStatement
+			
+			PreparedStatement ps = conn.prepareStatement(sql); //we use PS for SQL commands with variables
+			
+			//use the PreparedStatement objects' methods to insert values into the query's ?s
+			ps.setInt(1, newStatus.getStatus());
+			ps.setInt(2, newStatus.getAuthor());	
+		
+			
+			//this executeUpdate method sends and executes the SQL command we built
+			ps.executeUpdate(); //we use executeUpdate for inserts, updates, and deletes
+			//we use executeQuery() for selects
+			
+			//send confirmation to the console if successful
+			System.out.println("Reimbursement status updated!");
+			
+			
+			
+		} catch(SQLException e) {
+			System.out.println("Failed to add new Reimbursement");
+			e.printStackTrace();
+		}
+	}	
 	
 	
-	
-	public Optional<String> getByUsernamenotreally() { //This will use SQL SELECT functionality
-
+	public List<Reimbursement>viewAllRequests () { //This will use SQL SELECT functionality
+		
 		try(Connection conn = ConnectionFactory.getConnection()){ //all of my SQL stuff will be within this try block
-
+			
 			//Initialize an empty ResultSet object that will store the results of our SQL query
 			ResultSet rs = null;
-
+			
 			//write the query that we want to send to the database, and assign it to a String
-
-			//WHAT IS SUPPOSED TO WORK
-			String sql = "SELECT ers_username FROM ers_users;";
-
+			String sql = "SELECT * FROM ers_reimbursement;";
+					
 			//Put the SQL query into a Statement object (The Connection object has a method for this!!)
 			Statement statement = conn.createStatement();
-
+			
 			//EXECUTE THE QUERY, by putting the results of the query into our ResultSet object
 			//The Statement object has a method that takes Strings to execute as a SQL query
 			rs = statement.executeQuery(sql);
-
-			//All the code above makes a call to your database
-
+			
+			//All the code above makes a call to your database... Now we need to store the data in an ArrayList.
+			
+			//create an empty ArrayList to be filled with the data from the database
+			List<Reimbursement> ReList = new ArrayList<>();
+			
+			//while there are results in the resultset...
 			while(rs.next()) {
-				User unames = new User(
-						rs.getString("ers_username")
+				
+				//Use the all args constructor to create a new Employee object from each returned row from the DB
+				Reimbursement r = new Reimbursement(
+						//we want to use rs.get for each column in the record
+						rs.getDouble("reimb_amount"),
+						rs.getInt("reimb_author"),
+						rs.getInt("reimb_status_id")
 						);
-
-				Optional<String> username = Optional.ofNullable(unames.getUsername());
-				System.out.println(username);
+				
+				
+				//and populate the ArrayList with each new Employee object
+				ReList.add(r); //e is the new Employee object we created above
+		
 			}
-
-
-
-
-
-			return Optional.ofNullable("yo");
-
+						
+			//when there are no more results in rs, the while loop will break
+			//then, return the populated ArrayList of Employees
+			return ReList;
+			
 		} catch (SQLException e) {
 			System.out.println("Something went wrong selecting employees!");
 			e.printStackTrace();
 		}
-
+		
 		return null; //we add this after the try/catch block, so Java won't yell
 		//(Since there's no guarantee that the try will run)
-
+		
 	}
-
 	
 }
 

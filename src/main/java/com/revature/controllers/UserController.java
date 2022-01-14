@@ -136,5 +136,51 @@ public class UserController {
 //			
 //	};
 	
+	//Handler for changing status of Reimbursement
+	public Handler updateStatus = (ctx) -> {
+		
+		if(ctx.req.getSession() != null) {
+			String body = ctx.body();
+			
+			Gson gson = new Gson();
+			
+			Reimbursement re = gson.fromJson(body, Reimbursement.class);
+			
+			us.updateStatus(re);
+			
+			ctx.result("Status was updated!");
+			ctx.status(201);		
+			
+		}else {
+			ctx.result("Something went wrong updating status");
+			ctx.status(404);
+		}
+			
+	};
+	
+	//Handler for getting all reimbursements
+	public Handler viewAllRequests = (ctx) -> {
+		if(ctx.req.getSession() != null) { //This just checks if the session exists
+			
+			List<Reimbursement> allRe = us.viewAllRequests();
+			
+			//This requires adding gson dependency to xml file
+			Gson gson = new Gson();
+			
+			//Use gson library to convert the java object to a JSON string
+			String JSONUsers = gson.toJson(allRe);
+			
+			//Give the response body with a JSON string
+			ctx.result(JSONUsers);
+			ctx.status(200);
+			
+			
+		}else {
+			ctx.result("You failed to get all reimbursement requests");
+			ctx.status(401);
+			
+		}
+			
+	};
 	
 }
