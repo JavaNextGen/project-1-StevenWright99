@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>ERS</title>
+		<!-- This is a link to a bootstrap stylesheet, which will basically set a premade style for your page -->
+		
+		<!--bootstrap classes cheatsheet-->
+		<!--https://www.w3schools.com/bootstrap/bootstrap_ref_css_buttons.asp-->
+		<!--<link rel = "stylesheet" href="ProjectFiles/style.css"/>-->
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	</head>
+	<body>
+		
+		<section align = "center">
+		<!--We need a div called container to hold all of our bootstrap styling-->
+		<div class="container">
+
+			
+			<h2>Employee Reimbursement System</h2>
+
+				<div>
+				<!-- Login Elements Here -->
+				<div id="loginRow" class="row">
+					<h3>Please Enter your Login Information!</h3>
+						<input id="username" placeholder="Username"/>
+				</div>
+			
+				<div>
+					<input id="password" type="password" placeholder="Password" />
+				</div>
+
+				<!--The employee/manager check box-->
+				<div>
+					<input type = "checkbox" id ="ERSType"/>
+					<label for = "ERSType">Finance Manager</label>
+				</div>
+
+				<div>
+					<button id="loginButton" class="btn btn-primary col-sm-4">Login</button>
+				
+					<button id="registerButton" class="btn btn-primary col-sm-4">Register</button>
+					
+		
+					
+				</div>
+
+		</div>
+				<!-- default type is text -->
+				<!-- <input type="text"> -->
+				
+		</section>	
+				
+			
+
+
+
+			<br />
+			<br />
+			<!-- We want to display(table) all of the employee information when it comes back from the server -->
+			
+
+	</div>
+
+		<script src="LoginScript.js"></script>
+	</body>
+</html>

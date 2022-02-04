@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        </style>
+    <title>Document</title>
+</head>
+<body>
+
+    <section align = "center">
+    <h2>Finanace Manager Hub</h2>
+
+    <!--This button will show all info from ers_reimbursement-->
+    <div>
+        <h3>View All Reimbursements</h3>
+    </div>
+    <div>
+        <button id="ViewHistory" class="btn btn-primary col-sm-4">View All</button>
+    </div>
+
+    <p><button onclick="sortTable()">Sort</button></p>
+
+    <div id="table-row" class="row">
+        <table id="ReimbTable" class="table table-hover table-bordered table-dark">
+            <thead>
+                <tr>
+                    <th>Employee Id</th>
+                    <th>Reimbursement Amount</th>
+                    <th>Reimbursement Status</th>
+                </tr>
+            </thead>
+            <tbody id="ReimbBody">
+                <!--blank until filled by our JS when data comes in-->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function sortTable() {
+          var table, rows, switching, i, x, y, shouldSwitch;
+          table = document.getElementById("ReimbTable");
+          switching = true;
+          /*Make a loop that will continue until
+          no switching has been done:*/
+          while (switching) {
+            //start by saying: no switching is done:
+            switching = false;
+            rows = table.rows;
+            /*Loop through all table rows (except the
+            first, which contains table headers):*/
+            for (i = 1; i < (rows.length - 1); i++) {
+              //start by saying there should be no switching:
+              shouldSwitch = false;
+              /*Get the two elements you want to compare,
+              one from current row and one from the next:*/
+              x = rows[i].getElementsByTagName("TD")[0];
+              y = rows[i + 1].getElementsByTagName("TD")[0];
+              //check if the two rows should switch place:
+              if (Number(x.innerHTML) > Number(y.innerHTML)) {
+                //if so, mark as a switch and break the loop:
+                shouldSwitch = true;
+                break;
+              }
+            }
+            if (shouldSwitch) {
+              /*If a switch has been marked, make the switch
+              and mark that a switch has been done:*/
+              rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+              switching = true;
+            }
+          }
+        }
+        </script>   
+
+    <!--This button will reimbursements with pending attribute-->
+    <div>
+        <h3>Update Reimbursement Status</h3>
+    </div>
+
+    <div>
+        Enter Employee Id
+    </div>
+    <div>
+        <input id="Id" type="number" placeholder="Employee Id" />
+    </div>
+    <div>
+       {Enter 2 to Approve Request} or {Enter 3 to Deny Request}
+    </div>
+    <div>
+        <input id="Status" type="number" placeholder="Status" />
+    </div>
+    <div>
+        <button id="Update" class="btn btn-primary col-sm-4">Update</button>
+    </div>
+</section>
+<script src = "FMHome.js"></script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+CREATE TABLE ers_reimbursement_status(
+reimb_status TEXT,
+
+--reimb_status_id serial primary key
+reimb_status_id serial PRIMARY KEY 
+--reimb_status_id int references ers_reimbursement(ers_reimbursement_pk)
+);
+
+```````````````````````````````````````````````````````````
+
+CREATE TABLE ers_reimbursement_type( 
+reimb_type TEXT,
+
+reimb_type_id serial PRIMARY KEY
+--reimb_type_id int references ers_reimbursement(ers_reimbursement_pk)
+);
+
+```````````````````````````````````````````````````````````````
+
+
+create table ers_user_roles( 
+user_role TEXT,
+ers_user_role_id serial PRIMARY KEY 
+--ers_users_pk int references ers_users(ers_users_pk) 
+);
+
+````````````````````````````````````````````````````````````````
+
+
+CREATE TABLE ers_reimbursement( 
+reimb_amount decimal,
+reimb_submitted timestamp,
+reimb_resolved timestamp,
+reimb_description text,
+reimb_receipt bytea,
+
+reimb_id serial PRIMARY KEY,
+
+reimb_status_id int references ers_reimbursement_status(reimb_status_id),
+reimb_type_id int references ers_reimbursement_type(reimb_type_id),
+reimb_author int references ers_users(ers_users_id),
+reimb_resolver int references ers_users(ers_users_id)
+);
+
+`````````````````````````````````````````````````````````````````
+
+
+CREATE TABLE ers_users(
+ers_username TEXT,
+ers_password TEXT,
+user_first_name TEXT,
+user_last_name TEXT,
+user_email TEXT,
+
+ers_users_id serial PRIMARY KEY,
+
+--Add back in later
+ers_user_role_id INT  REFERENCES ers_user_roles(ers_user_role_id)
+);
+
+
+--=================================
+--=================================
+```````````````````````````````````````````````````````````````````
+INSERT INTO ers_user_roles(USER_ROLE)
+VALUES ('Employee'),
+	   ('Manager')
+
+INSERT INTO ers_users(ers_username, ers_password, user_first_name, user_last_name, user_email, ers_user_role_id)
+VALUES ('mbanz', '12345', 'Matthew', 'Banzer', 'mbz@gmail.com', '1'),
+	   ('peachydayz', 'lovemario', 'Princess', 'Peach', 'prpeach@king.dom', '2')
+	   
+INSERT INTO ers_users(ers_username, ers_password, user_first_name, user_last_name, user_email, ers_user_role_id)
+VALUES ('mbanz', '12345', 'Matthew', 'Banzer', 'mbz@gmail.com', '1')
+	   
+INSERT INTO ers_reimbursement_status(reimb_status)
+VALUES ('Pending'),
+	   ('Approved'),
+	   ('Rejected')
+	   
+INSERT INTO ers_reimbursement(reimb_amount, reimb_status_id, reimb_author)
+VALUES ('100.57','1','2')
+	   
+UPDATE ers_reimbursement 
+SET reimb_status_id = '1'
+WHERE reimb_author = 2
+
+
+SELECT * FROM ers_user_roles;
+SELECT * FROM ers_users;
+SELECT * FROM ers_reimbursement_status;
+SELECT * FROM ers_reimbursement;	
+
+
+
+SELECT * FROM ers_user_roles WHERE ers_
+
+DROP TABLE ers_reimbursement CASCADE;
+DROP TABLE ers_reimbursement_type cascade; 
+DROP TABLE ers_reimbursement_status cascade ; 
+DROP TABLE ers_users cascade;
+DROP TABLE ers_user_roles cascade ;
+
+SELECT * FROM ers_users WHERE ers_username = 'mbanz' AND ers_password = '12345'
+ 
