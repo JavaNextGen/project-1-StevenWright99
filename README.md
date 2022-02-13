@@ -39,7 +39,7 @@ https://github.com/JavaNextGen/project-1-StevenWright99.git
 
 ![Alt text](/relative/path/to/img.jpg?raw=true "Optional Title")
 
-![Alt text](/JavaNextGen/project-1-StevenWright99/blob/main/screenshots/Employee%20Hub.png?raw=true "Optional Title")
+![Alt text](/JavaNextGen/project-1-StevenWright99/tree/main/screenshots/Register.png?raw=true "Optional Title")
 
 https://github.com/JavaNextGen/project-1-StevenWright99/blob/main/screenshots/Employee%20Hub.png
 
