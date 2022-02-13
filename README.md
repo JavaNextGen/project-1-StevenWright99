@@ -33,15 +33,13 @@ To-do list:
 
 ## Usage
 
-> Here, you instruct other people on how to use your project after they’ve installed it. This would also be a good place to include screenshots of your project in action.
+https://github.com/JavaNextGen/project-1-StevenWright99/blob/main/screenshots/Login.png
 
-https://github.com/JavaNextGen/project-1-StevenWright99.git
-
-![Alt text](/relative/path/to/img.jpg?raw=true "Optional Title")
-
-![Alt text](/JavaNextGen/project-1-StevenWright99/tree/main/screenshots/Register.png?raw=true "Optional Title")
+https://github.com/JavaNextGen/project-1-StevenWright99/blob/main/screenshots/Register.png
 
 https://github.com/JavaNextGen/project-1-StevenWright99/blob/main/screenshots/Employee%20Hub.png
+
+https://github.com/JavaNextGen/project-1-StevenWright99/blob/main/screenshots/Finance%20Hub.png
 
 ## Contributors
 
